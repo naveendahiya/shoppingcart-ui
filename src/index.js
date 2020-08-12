@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/header';
-import 'semantic-ui-css/semantic.min.css'
+import PersistentDrawerLeft from './components/drawer';
+import ProductList from './components/products';
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
+    <PersistentDrawerLeft />
+    <ProductList />
   </React.StrictMode>,
   document.getElementById('root')
 );
