@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    border: '1px solid black',
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -154,6 +155,8 @@ export default function Header(props) {
     <div className={classes.grow}>
       <AppBar 
       position="fixed"
+      elevation={0}
+      color="inherit"
       >
         <Toolbar>
           <IconButton

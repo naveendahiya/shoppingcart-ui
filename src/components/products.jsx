@@ -2,21 +2,75 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
+import ProductCard from './productCard';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import '../styles/pages/products.scss';
 
 
-class ProductsList extends Component{
-    constructor(props){
+
+
+class ProductsList extends Component {
+    constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this)
     }
 
-    render(){
-        return(
+    handleClick(event) {
+        event.preventDefault();
+        console.info('You clicked a breadcrumb.');
+    }
+
+    render() {
+        return (
             <React.Fragment>
-            <CssBaseline />
-            <Container maxWidth="md">
-              <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
-            </Container>
-          </React.Fragment>
+                <CssBaseline />
+                <Container className='box' maxWidth="lg">
+                    <Typography component="div" style={{ backgroundColor: 'white', height: 'fit-content', marginTop: '64px' }}>
+
+                        <div className="box-1">
+                            <span>Plain T-Shirts</span>(15)
+                       </div>
+
+                        <div className="box-2">
+
+                            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </DropdownButton>
+
+                            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </DropdownButton>
+
+                            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </DropdownButton>
+
+                            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </DropdownButton>
+                        </div>
+
+                        <div className="box-3">
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                            <ProductCard />
+                        </div>
+
+                    </Typography>
+                </Container>
+            </React.Fragment>
         )
     }
 }
