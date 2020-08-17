@@ -9,7 +9,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
+import { FormGroup } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
+import { FormHelperText } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
+import { Input } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -37,8 +45,12 @@ const ProductDetail = () => {
 			<Container maxWidth="lg">
 				<Typography component="div" style={{ height: '100vh' }}>
 					<Card variant="outlined" className={`row ${classes.root}`}>
-						<CardMedia className={`col-lg-6 ${classes.media}`} image="../images/cart.png" title="Paella dish" />
-						<CardContent className={`col-lg-6 ${classes.details}`}>
+						<CardMedia
+							className={`col-md-6 ${classes.media}`}
+							image="../images/cart.png"
+							title="Paella dish"
+						/>
+						<CardContent className={`col-md-6`}>
 							<Typography variant="body2" color="textSecondary" component="p">
 								<h2 className={`product-name ${classes.heading}`}>Buffalo - Striploin</h2>
 								<div className="product-price">$39.11</div>
@@ -54,10 +66,41 @@ const ProductDetail = () => {
 								nec velit porta fringilla. Donec quis urna neque. Maecenas sit amet aliquet quam.
 								Maecenas nisl elit, gravida in dui vel, porta accumsan orci.
 							</Typography>
+							<div style={{ display: 'inline-flex' }}>
+								<div>
+									<FormGroup>
+										<FormControl>
+											<InputLabel htmlFor="Pincode">Pincode</InputLabel>
+											<Input id="Pincode" aria-describedby="my-delievery-area" />
+											<FormHelperText id="my-delievery-area">
+												Check if it is available in your area
+											</FormHelperText>
+										</FormControl>
+									</FormGroup>
+								</div>
+								<div style={{ alignSelf: 'center',marginLeft:'0.5rem' }}>
+									<Button variant="contained" color="primary" disableElevation>
+										Check
+									</Button>
+								</div>
+							</div>
 							<CardActions className="card-button" disableSpacing>
-								<Button variant="contained" color="secondary" disableElevation>
-									ADD TO CART
-								</Button>
+								<Tooltip title="Add to wishlist">
+									<FavoriteIcon
+										title="Add to wishlist"
+										color="secondary"
+										style={{ cursor: 'pointer' }}
+									/>
+								</Tooltip>
+								<div>
+									<FormControl>
+										<InputLabel htmlFor="Quantity">Quantity</InputLabel>
+										<Input type="number" id="Quantity" aria-describedby="my-quantity" className="mb-2" />
+										<Button variant="contained" color="secondary" disableElevation>
+											ADD TO CART
+										</Button>
+									</FormControl>
+								</div>
 							</CardActions>
 						</CardContent>
 					</Card>
