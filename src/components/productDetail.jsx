@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
 	const classes = useStyles();
 
 	return (

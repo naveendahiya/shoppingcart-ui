@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductCard() {
+export default function ProductCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -39,8 +39,8 @@ export default function ProductCard() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-            <div className="product-name">Buffalo - Striploin</div>
-            <div className="product-price">$39.11</div>
+  <div className="product-name">{props.item.name}</div>
+  <div className="product-price">${props.item.price}</div>
         </Typography>
       </CardContent>
       <CardActions className='card-button' disableSpacing>

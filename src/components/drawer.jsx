@@ -11,7 +11,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from "react-router-dom";
 import Header from './header';
+import TShirt from '../Data';
+import TShirts, { Shirt, Trousers, Jeans } from '../Data';
+
 
 const drawerWidth = 240;
 
@@ -84,6 +88,21 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
+  const Data = (name) => {
+    switch (name) {
+      case "TShirts":
+        return TShirts;
+      case "Shirts":
+        return Shirt;
+      case "Trousers":
+        return Trousers;
+      case "Jeans":
+        return Jeans;
+      default:
+        return TShirts;
+    }
+  }
 
   return (
       <>
@@ -104,19 +123,19 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['TShirts', 'Shirts', 'Trousers', 'Jeans'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <Link 
+              to={{
+                pathname: '/Products',
+                aboutProps: {
+                     data: Data(text)
+                }
+              }}
+              >
               <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              </Link>
             </ListItem>
           ))}
         </List>

@@ -31,6 +31,7 @@ const TShirts = [
     },
 ]
 
+
 const Trousers = [
     {
         name: 'Glass Clear 8 Oz',
@@ -53,6 +54,7 @@ const Trousers = [
         price: '123.82',
     }
 ]
+
 
 const Shirt = [
     {
@@ -109,3 +111,6 @@ const Jeans = [
         price: '65',
     }
 ]
+
+export {Shirt , Trousers, Jeans};
+export default TShirts;
