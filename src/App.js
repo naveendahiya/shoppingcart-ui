@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter} from 'react-router-dom';
+import ROUTES, { RenderRoutes } from "./config/routes";
+import PersistentDrawerLeft from './components/drawer';
+import { Provider } from 'react-redux';
+import store from './components/store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-         <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Provider store={store}>
+    <BrowserRouter>
+    <PersistentDrawerLeft />
+    <RenderRoutes routes={ROUTES} />
+    </BrowserRouter>
+    </Provider>
+    </>
   );
 }
 

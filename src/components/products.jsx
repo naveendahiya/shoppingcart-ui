@@ -2,51 +2,65 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
 import ProductCard from './productCard';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
 import '../styles/pages/products.scss';
+import TShirts, { Shirt, Trousers, Jeans } from '../Data';
 
+const ProductsList = (props) => {
+   
+    const List = () => {
+        let items = [];
+        const category = props.match.params.category;
+        if(props.location){
+            switch (category) {
+                case "TShirts":
+                    items = TShirts;
+                    break;
+                case "Shirts":
+                    items = Shirt;
+                    break;
+                case "Trousers":
+                    items = Trousers;
+                    break;
+                case "Jeans":
+                    items = Jeans;
+                    break;
+                default:
+                    items = TShirts;
+                    break;
+            }
+        }else{
+            items = props.location.aboutProps.data;
+        }
 
-
-
-class ProductsList extends Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick(event) {
-        event.preventDefault();
-        console.info('You clicked a breadcrumb.');
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <CssBaseline />
-                <Container className='box' maxWidth="lg">
-                    <Typography component="div" style={{ backgroundColor: 'white', height: 'fit-content', marginTop: '64px' }}>
-
-                        <div className="box-1">
-                            <span>Plain T-Shirts</span>(15)
-                       </div>
-
-
-                        <div className="box-3">
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                            <ProductCard />
-                        </div>
-
-                    </Typography>
-                </Container>
-            </React.Fragment>
+        const products = items.map((item) => 
+              <ProductCard item={item} />
+        )
+        return(
+           products
         )
     }
+
+    return(
+        <React.Fragment>
+        <CssBaseline />
+        <Container className='box' maxWidth="lg">
+            <Typography component="div" style={{ backgroundColor: 'white', height: 'fit-content', marginTop: '64px' }}>
+
+                <div className="box-1">
+                    <span>Plain T-Shirts</span>(15)
+               </div>
+
+
+                <div className="box-3">
+                   {List()}
+                </div>
+
+            </Typography>
+        </Container>
+    </React.Fragment>
+    )
 }
+
 
 export default ProductsList;
