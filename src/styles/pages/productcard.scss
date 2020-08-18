@@ -29,3 +29,17 @@
     align-items: center !important;
     justify-content: space-between !important;
 }
+
+.product-card{
+    position: relative !important;
+    .quick-view{
+        position: absolute !important;
+        left: 20px;
+        top: 10px;
+    }
+    .wishlist{
+        position: absolute !important;
+        right: 20px;
+        top: 10px;
+    }
+}

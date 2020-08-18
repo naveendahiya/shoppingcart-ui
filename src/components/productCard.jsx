@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -7,7 +7,15 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import '../styles/pages/productcard.scss';
+
+import { useDispatch } from 'react-redux';
+import { itemAdded } from '../reducers/wishlistSlice';
+import { productAdded } from '../reducers/cartSlice';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +32,36 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [wishlistadd, setWishlistadd] = useState(false);
+  const [cartadd, setCartadd] = useState(false);
+  const dispatch = useDispatch()
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  let item2 = props.item;
+  item2 = {...item2, quantity: quantity}
+
+  const WishlistAdd = () => {
+    if (props.item) {
+      dispatch(
+        itemAdded(props.item)
+      )
+      setWishlistadd(true);
+    }
+  }
+
+  const CartAdd = () => {
+    if(item2){
+      dispatch(
+        productAdded(item2)
+      )
+      setCartadd(true);
+    }
+  }
 
   return (
-    <Card className={classes.root}>
+    <Card  className='product-card' >
+      <CheckBoxOutlineBlankIcon className='quick-view' />
+      {wishlistadd == true ? <FavoriteIcon className='wishlist' />  : <FavoriteBorderIcon onClick={WishlistAdd} className='wishlist' /> }
       <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
@@ -46,7 +76,7 @@ export default function ProductCard(props) {
       <CardActions className='card-button' disableSpacing>
       <Button color="secondary">Details</Button>
 
-    <Button variant="contained" color="secondary" disableElevation>
+    <Button onClick={(event)=>CartAdd()} variant="contained" color="secondary" disableElevation>
       ADD TO CART
     </Button>
       </CardActions>

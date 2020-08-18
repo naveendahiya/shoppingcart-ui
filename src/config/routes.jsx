@@ -6,7 +6,7 @@ import Cart from '../components/cart';
 
 const ROUTES = [
     { path: '/', key: "APP_ROOT", exact: true, component: () => <h1>Categories</h1>},
-    { path: '/products', key: 'APP_PRODUCTS', exact: true, component: ProductList},
+    { path: '/products/:category', key: 'APP_PRODUCTS', exact: true, component: ProductList},
     { path: '/wishlist', key: 'APP_WISHLIST', exact: true, component: Wishlist},
     { path: '/cart', key: 'APP_CART', exact: true, component: Cart },
     { 

@@ -13,7 +13,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from "react-router-dom";
 import Header from './header';
-import TShirt from '../Data';
 import TShirts, { Shirt, Trousers, Jeans } from '../Data';
 
 
@@ -128,7 +127,7 @@ export default function PersistentDrawerLeft() {
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <Link 
               to={{
-                pathname: '/Products',
+                pathname: `/Products/${text}`,
                 aboutProps: {
                      data: Data(text)
                 }

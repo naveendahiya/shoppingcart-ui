@@ -4,13 +4,35 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import ProductCard from './productCard';
 import '../styles/pages/products.scss';
-import TShirts from '../Data';
+import TShirts, { Shirt, Trousers, Jeans } from '../Data';
 
 const ProductsList = (props) => {
-
+   
     const List = () => {
-        const items = props.location.aboutProps.data;
-        console.log(items);
+        let items = [];
+        const category = props.match.params.category;
+        if(props.location){
+            switch (category) {
+                case "TShirts":
+                    items = TShirts;
+                    break;
+                case "Shirts":
+                    items = Shirt;
+                    break;
+                case "Trousers":
+                    items = Trousers;
+                    break;
+                case "Jeans":
+                    items = Jeans;
+                    break;
+                default:
+                    items = TShirts;
+                    break;
+            }
+        }else{
+            items = props.location.aboutProps.data;
+        }
+
         const products = items.map((item) => 
               <ProductCard item={item} />
         )
