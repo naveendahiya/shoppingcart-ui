@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React,{ useState, forwardRef, useRef, useImperativeHandle } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import TransitionsModal from './quickview';
 import '../styles/pages/productcard.scss';
 
 import { useDispatch } from 'react-redux';
@@ -36,6 +37,7 @@ export default function ProductCard(props) {
   const [wishlistadd, setWishlistadd] = useState(false);
   const [cartadd, setCartadd] = useState(false);
   const dispatch = useDispatch()
+  const childRef = useRef();
 
   let item2 = props.item;
   item2 = {...item2, quantity: quantity}
@@ -58,9 +60,14 @@ export default function ProductCard(props) {
     }
   }
 
+  const triggerModal = () => {
+    this.refs.TransitionsModal.handleOpen();
+  }
+
   return (
     <Card  className='product-card' >
-      <CheckBoxOutlineBlankIcon className='quick-view' />
+      <TransitionsModal ref={childRef} />
+      <CheckBoxOutlineBlankIcon onClick={()=>childRef.current.handleOpen()} className='quick-view' />
       {wishlistadd == true ? <FavoriteIcon className='wishlist' />  : <FavoriteBorderIcon onClick={WishlistAdd} className='wishlist' /> }
       <CardMedia
         className={classes.media}
