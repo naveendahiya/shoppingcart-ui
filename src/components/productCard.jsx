@@ -1,7 +1,7 @@
 import React,{ useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
+import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
@@ -14,7 +14,7 @@ import TransitionsModal from './quickview';
 import '../styles/pages/productcard.scss';
 
 import { useDispatch } from 'react-redux';
-import { itemAdded } from '../reducers/wishlistSlice';
+import { itemAdded, itemDelete } from '../reducers/wishlistSlice';
 import { productAdded } from '../reducers/cartSlice';
 
 
@@ -43,11 +43,19 @@ export default function ProductCard(props) {
   item2 = {...item2, quantity: quantity}
   const WishlistAdd = () => {
     setWishlistadd(true);
-    console.log(props.item.name);
-    if (props.item) {
+    if (item2) {
       dispatch(
         itemAdded(props.item)
       )
+    }
+  }
+
+  const WishlistDelete = () => {
+    if (item2){
+      dispatch(
+        itemDelete(item2, item2.name)
+      )
+      setWishlistadd(false);
     }
   }
 
@@ -62,9 +70,9 @@ export default function ProductCard(props) {
 
   return (
     <Card  className='product-card' >
-      <TransitionsModal ref={childRef} />
-      <CheckBoxOutlineBlankIcon onClick={()=>childRef.current.handleOpen()} className='quick-view' />
-      {wishlistadd == true ? <FavoriteIcon className='wishlist' />  : <FavoriteBorderIcon onClick={()=>WishlistAdd()} className='wishlist' /> }
+      <TransitionsModal item={props.item} ref={childRef} />
+      <CheckBoxOutlineBlankIcon onClick={()=>childRef.current.handleOpen()}  className='quick-view' />
+      {wishlistadd == true ? <FavoriteIcon onClick={WishlistDelete} className='wishlist' />  : <FavoriteBorderIcon onClick={()=>WishlistAdd()} className='wishlist' /> }
       <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
