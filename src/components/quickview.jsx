@@ -3,6 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import '../styles/pages/quickview.scss';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -48,9 +52,27 @@ const TransitionsModal = forwardRef((props, ref) => {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                    <div className="modal-box">
+                        <div className="left">
+                            <div className="img"></div>
+                        </div>
+                        <div className="right">
+                            <div className="info">
+                                <div className="product-info">
+                                    <h3 className='product-info-name'>{props.item.name}</h3><br></br><span className='product-info-price'>${props.item.price}</span>
+                                </div>
+                                <div className="product-quantity">
+                                    <span>Quantity</span><br></br>
+                                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                                </div>
+                                <div className="cart">
+                                    <Button variant="contained" color="primary" disableElevation>
+                                        ADD TO CART
+                                    </Button><br></br>
+                                    <span>Details</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </Fade>
             </Modal>
