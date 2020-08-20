@@ -101,6 +101,7 @@ export default function PersistentDrawerLeft() {
       default:
         return TShirts;
     }
+    console.log(name);
   }
 
   return (
