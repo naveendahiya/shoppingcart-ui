@@ -10,8 +10,9 @@ const wishlistSlice = createSlice({
             state.push(action.payload)
         },
         itemDelete(state,action){
-            const { id } = action.payload
-            state.filter(item => id !== item.id)
+            const { name } = action.payload
+            let state2 = state.filter(item => name !== item.name)
+            return state2;
         },
         reset(state){
             Object.assign(state, initialState)
@@ -19,6 +20,6 @@ const wishlistSlice = createSlice({
     }
 })
 
-export const { itemAdded }  = wishlistSlice.actions
+export const { itemAdded, itemDelete }  = wishlistSlice.actions
 
 export default wishlistSlice.reducer

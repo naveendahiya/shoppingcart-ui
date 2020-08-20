@@ -8,13 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import TransitionsModal from './quickview';
 import '../styles/pages/productcard.scss';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 import { useDispatch } from 'react-redux';
-import { itemAdded } from '../reducers/wishlistSlice';
+import { itemDelete } from '../reducers/wishlistSlice';
 import { productAdded } from '../reducers/cartSlice';
 
 
@@ -31,24 +30,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductCard(props) {
+export default function WishlistCard(props) {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(1);
-  const [wishlistadd, setWishlistadd] = useState(false);
   const [cartadd, setCartadd] = useState(false);
   const dispatch = useDispatch()
   const childRef = useRef();
 
   let item2 = props.item;
   item2 = {...item2, quantity: quantity}
-  const WishlistAdd = () => {
-    setWishlistadd(true);
-    console.log(props.item.name);
-    if (props.item) {
-      dispatch(
-        itemAdded(props.item)
-      )
-    }
+
+  const WishlistDelete = () => {
+      if(item2){
+          dispatch(
+              itemDelete(item2, item2.name)
+          )
+      }
   }
 
   const CartAdd = () => {
@@ -64,7 +61,7 @@ export default function ProductCard(props) {
     <Card  className='product-card' >
       <TransitionsModal ref={childRef} />
       <CheckBoxOutlineBlankIcon onClick={()=>childRef.current.handleOpen()} className='quick-view' />
-      {wishlistadd == true ? <FavoriteIcon className='wishlist' />  : <FavoriteBorderIcon onClick={()=>WishlistAdd()} className='wishlist' /> }
+      <CancelIcon onClick={WishlistDelete} className='wishlist' />
       <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"

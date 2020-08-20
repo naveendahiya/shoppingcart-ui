@@ -12,7 +12,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -186,6 +189,17 @@ export default function Header(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          <IconButton aria-label="products" color="inherit">
+              <Link 
+              to={{
+                pathname: `/wishlist`,
+              }}
+              >
+                  <Badge badgeContent={0} color="secondary">
+                  <FavoriteIcon />
+                  </Badge>
+              </Link>
+            </IconButton>
             <IconButton aria-label="products" color="inherit">
               <Badge badgeContent={0} color="secondary">
                 <ShoppingCartIcon />
